@@ -8,5 +8,9 @@ class StorageService {
     await doc.update({"docId": doc.id});
   }
 
-  dynamic read(String key, String s) {}
+  dynamic read(String key, String uid) async {
+    var snapshot =
+        await firestore.collection(key).where("uid", isEqualTo: uid).get();
+    return snapshot.docs.map((doc) => doc.data()).toList();
+  }
 }

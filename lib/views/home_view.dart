@@ -5,11 +5,22 @@ import 'package:project2_1/controllers/todo_controller.dart';
 import 'package:project2_1/model/todo_model.dart';
 import 'package:project2_1/views/add_todo_view.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   HomeView({super.key});
 
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   TodoController todoController = Get.put(TodoController());
+
   AuthController authController = Get.put(AuthController());
+  void initState() {
+    super.initState();
+    todoController
+        .onInit(); // Ensure onInit is called every time HomeView is used
+  }
 
   @override
   Widget build(BuildContext context) {
