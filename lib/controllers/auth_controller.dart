@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:project2_1/views/home_view.dart';
+import 'package:project2_1/views/login_view.dart';
 
 class AuthController extends GetxController {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -21,7 +22,7 @@ class AuthController extends GetxController {
       );
       Get.snackbar("สำเร็จ", "สมัครสมาชิกเสร็จสิ้น");
     } catch (e) {
-      Get.snackbar("สำเร็จ", "ล็อกอินสำเร็จ");
+      Get.snackbar("ล้มเหลว", e.toString());
     }
   }
 
@@ -31,10 +32,20 @@ class AuthController extends GetxController {
         email: email,
         password: password,
       );
-      Get.snackbar("สำเร็จ", "ล็อกอินสำเร็จ");
+      Get.snackbar("สำเร็จ", "เข้าสู่ระบบสำเร็จ");
       Get.off(HomeView());
     } catch (e) {
-      Get.snackbar("ผิดพลาด", e.toString());
+      Get.snackbar("ล้มเหลว", e.toString());
+    }
+  }
+
+  Future<void> logout() async {
+    try {
+      await firebaseAuth.signOut();
+      Get.snackbar("สำเร็จ", "ออกจากระบบสำเร็จ");
+      Get.off(LoginView());
+    } catch (e) {
+      Get.snackbar("ล้มเหลว", e.toString());
     }
   }
 }

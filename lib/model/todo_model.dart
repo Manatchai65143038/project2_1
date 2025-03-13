@@ -15,6 +15,7 @@ class TodoModel {
     'uid': uid,
     'docId': docId,
   };
+
   TodoModel.fromJson(Map<String, dynamic> json)
     : title = json['title'],
       subtitle = json['subtitle'],

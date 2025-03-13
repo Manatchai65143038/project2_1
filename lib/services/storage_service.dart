@@ -8,5 +8,5 @@ class StorageService {
     await doc.update({"docId": doc.id});
   }
 
-  dynamic read(String key) {}
+  dynamic read(String key, String s) {}
 }

@@ -12,7 +12,10 @@ class AddTodoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('เพิ่มรายการ'), backgroundColor: Colors.green),
+      appBar: AppBar(
+        title: Text('เพิ่มรายการ'),
+        backgroundColor: const Color.fromARGB(255, 6, 182, 35),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
 
@@ -48,9 +51,12 @@ class AddTodoView extends StatelessWidget {
                     Get.snackbar(
                       'แจ้งเตือน',
                       'บันทึกรายการสำเร็จ',
-                      backgroundColor: Colors.green.withOpacity(
-                        0.3,
-                      ), // สีพื้นหลังของ Snackbar
+                      backgroundColor: const Color.fromARGB(
+                        255,
+                        6,
+                        196,
+                        230,
+                      ).withOpacity(0.3), // สีพื้นหลังของ Snackbar
                       colorText: Colors.black, // สีของข้อความใน Snackbar
                     );
 
@@ -59,7 +65,7 @@ class AddTodoView extends StatelessWidget {
 
                   // แสดง Snackbar แจ้งเตือนเมื่อบันทึกรายการสำเร็จ
                 },
-                child: Text('บันทึกรายการ'),
+                child: Text('Submit'),
               ),
             ],
           ),
