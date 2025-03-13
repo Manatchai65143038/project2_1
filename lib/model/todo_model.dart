@@ -1,9 +1,16 @@
 class TodoModel {
   String title;
-  String subtile;
+  String subtitle;
   bool isDone;
+  TodoModel(this.title, this.subtitle, this.isDone);
 
-  TodoModel({required this.title, required this.subtile, this.isDone = false});
-
-  bool? get isCompleted => null;
+  Map<String, dynamic> toJson() => {
+    'title': title,
+    'subtitle': subtitle,
+    'isDone': isDone,
+  };
+  TodoModel.fromJson(Map<String, dynamic> json)
+    : title = json['title'],
+      subtitle = json['subtitle'],
+      isDone = json['isDone'];
 }

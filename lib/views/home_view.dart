@@ -22,52 +22,73 @@ class HomeView extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Obx(() {
-          return todoController.todoList.isEmpty
-              ? Center(
-                child: Text(
-                  'ไม่มีรายการสิ่งที่ต้องทำ',
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
-                ),
-              )
-              : ListView.builder(
-                itemCount: todoController.todoList.length,
-                itemBuilder: (context, index) {
-                  TodoModel todo = todoController.todoList[index];
-                  return Card(
-                    elevation: 4,
-                    margin: const EdgeInsets.symmetric(
-                      vertical: 8,
-                      horizontal: 4,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.all(12),
-                      title: Text(
-                        todo.title,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          decoration:
-                              todo.isDone ? TextDecoration.lineThrough : null,
+          return Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: todoController.todoList.length,
+                  itemBuilder: (context, index) {
+                    TodoModel todo = todoController.todoList[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 8,
+                        horizontal: 16,
+                      ),
+                      child: Card(
+                        elevation: 4, // ให้เงาสำหรับการตกแต่ง
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10), // มุมโค้งมน
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 12,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: Colors.grey.shade300,
+                            ), // ขอบกรอบ
+                            color: Colors.white, // พื้นหลังสีขาว
+                          ),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            title: Text(
+                              todo.title,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                            subtitle: Text(
+                              todo.subtitle,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey.shade600,
+                              ),
+                            ),
+                            leading: Checkbox(
+                              value: todo.isDone,
+                              onChanged: (bool? newValue) {
+                                todoController.toggletodo(index);
+                              },
+                            ),
+                            trailing: IconButton(
+                              onPressed: () {
+                                todoController.deleteTodo(index);
+                              },
+                              icon: Icon(Icons.delete, color: Colors.red),
+                            ),
+                          ),
                         ),
                       ),
-                      subtitle: Text(todo.subtile),
-                      leading: Checkbox(
-                        value: todo.isDone,
-                        activeColor: Colors.green,
-                        onChanged: (bool? newValue) {
-                          todoController.toggleTodo(index);
-                        },
-                      ),
-                      trailing: IconButton(
-                        onPressed: () => todoController.deleteTodo(index),
-                        icon: Icon(Icons.delete, color: Colors.red.shade700),
-                      ),
-                    ),
-                  );
-                },
-              );
+                    );
+                  },
+                ),
+              ),
+            ],
+          );
         }),
       ),
       floatingActionButton: FloatingActionButton(
