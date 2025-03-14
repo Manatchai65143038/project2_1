@@ -14,6 +14,15 @@ class TodoController extends GetxController {
     fetchTodos();
   }
 
+  /*************  ✨ Codeium Command ⭐  *************/
+  /// Fetches todos from Firestore and updates the [todoList] variable.
+  ///
+  /// If the user is not logged in, this does nothing.
+  ///
+  /// The [todoList] is updated with the new data from Firestore,
+  /// and is marked as changed so that the UI is updated.
+  ///
+  /******  73116e2a-b984-4555-b080-3d09c30b95f4  *******/
   Future<void> fetchTodos() async {
     var todos = await storageService.read(
       'todoList',
